@@ -10,5 +10,6 @@ public class MainApp {
 //        barangDao.update(new Barang("137", "Test MyBatis 1", 111, 333));
 //        barangDao.selectById("137");
 //        barangDao.deleteById("137");
+        barangDao.callProcedure("Show Barang");
     }
 }

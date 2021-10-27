@@ -13,72 +13,67 @@ public class BarangDao {
     }
 
     public void selectAll() {
-        try {
-            SqlSession session = sqlSessionFactory.openSession();
+        SqlSession session = sqlSessionFactory.openSession();
 
-            List<Barang> barangList = session.selectList("Barang.selectAll");
+        List<Barang> barangList = session.selectList("Barang.selectAll");
 
-            for (Barang barang : barangList) {
-                System.out.printf("%-30s %-30s %-30s %-30s\n",
-                        barang.getId_barang(), barang.getNama_barang(), barang.getJumlah(), barang.getHarga());
-            }
-
-            session.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (Barang barang : barangList) {
+            System.out.printf("%-30s %-30s %-30s %-30s\n",
+                    barang.getId_barang(), barang.getNama_barang(), barang.getJumlah(), barang.getHarga());
         }
+
+        session.close();
     }
 
     public void selectById(String id_barang) {
-        try {
-            SqlSession session = sqlSessionFactory.openSession();
+        SqlSession session = sqlSessionFactory.openSession();
 
-            Barang barang = session.selectOne("Barang.selectById", id_barang);
-            System.out.printf("%-30s %-30s %-30s %-30s\n",
-                    barang.getId_barang(), barang.getNama_barang(), barang.getJumlah(), barang.getHarga());
+        Barang barang = session.selectOne("Barang.selectById", id_barang);
+        System.out.printf("%-30s %-30s %-30s %-30s\n",
+                barang.getId_barang(), barang.getNama_barang(), barang.getJumlah(), barang.getHarga());
 
-            session.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        session.close();
     }
 
     public void insert(Barang barang) {
-        try {
-            SqlSession session = sqlSessionFactory.openSession();
 
-            session.insert("Barang.insert", barang);
-            session.commit();
-            System.out.println("Record Inserted Successfully");
-            session.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        SqlSession session = sqlSessionFactory.openSession();
+
+        session.insert("Barang.insert", barang);
+        session.commit();
+        System.out.println("Record Inserted Successfully");
+        session.close();
     }
 
     public void update(Barang barang) {
-        try {
-            SqlSession session = sqlSessionFactory.openSession();
+        SqlSession session = sqlSessionFactory.openSession();
 
-            session.update("Barang.update", barang);
-            session.commit();
-            System.out.println("Record updated Successfully");
-            session.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        session.update("Barang.update", barang);
+        session.commit();
+        System.out.println("Record updated Successfully");
+        session.close();
     }
 
     public void deleteById(String id_barang) {
-        try {
-            SqlSession session = sqlSessionFactory.openSession();
 
-            session.delete("Barang.deleteById", id_barang);
-            session.commit();
-            System.out.println("Record deleted Successfully");
-            session.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        SqlSession session = sqlSessionFactory.openSession();
+
+        session.delete("Barang.deleteById", id_barang);
+        session.commit();
+        System.out.println("Record deleted Successfully");
+        session.close();
+    }
+
+    public void callProcedure(String command) {
+        SqlSession session = sqlSessionFactory.openSession();
+
+        List<Barang> barangList = session.selectList("Barang.callProcedure");
+
+        for (Barang barang : barangList) {
+            System.out.printf("%-30s %-30s %-30s %-30s\n",
+                    barang.getId_barang(), barang.getNama_barang(), barang.getJumlah(), barang.getHarga());
         }
+
+        session.close();
     }
 }

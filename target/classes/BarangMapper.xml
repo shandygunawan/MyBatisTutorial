@@ -31,4 +31,8 @@
         DELETE FROM MST_BARANG
         WHERE id_barang=#{id_barang};
     </delete>
+
+    <select id = "callProcedure" resultMap="result_barang" parameterType="String" statementType="CALLABLE">
+        { CALL contoh_procedure(#{command, jdbcType = VARCHAR, mode = IN}) }
+    </select>
 </mapper>
